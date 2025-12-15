@@ -7,27 +7,32 @@ public class Bush : MonoBehaviour
     [SerializeField] private float respawnDuration = 10f;
     [SerializeField] private ParticleSystem boostParticles;
 
-    private bool isInteractable;
-    private SpriteRenderer rend;
+    private bool _isInteractable;
+    private SpriteRenderer _rend;
 
     private void Awake()
     {
-        rend = GetComponent<SpriteRenderer>();
+        _isInteractable = true;
+        _rend = GetComponent<SpriteRenderer>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            StartCoroutine(ApplyBoost(player));
-            boostParticles.Play();
+            if (_isInteractable)
+            {
+                PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+                StartCoroutine(ApplyBoost(player));
+                boostParticles.Play();
+            }
+            else return;
         }
     }
 
     private System.Collections.IEnumerator ApplyBoost(PlayerController player)
     {
-        isInteractable = false;
-        rend.color = Color.red;
+        _isInteractable = false;
+        _rend.color = Color.red;
         float originalJumpForce = player.jumpForce;
         player.jumpForce += addForce;
         yield return new WaitForSeconds(boostDuration);
@@ -40,8 +45,8 @@ public class Bush : MonoBehaviour
     private System.Collections.IEnumerator Respawn()
     {
         yield return new WaitForSeconds(respawnDuration);
-        isInteractable = true;
-        rend.color = Color.green;
+        _isInteractable = true;
+        _rend.color = Color.green;
         StopCoroutine(Respawn());
         Debug.Log("End Respawn");
     }

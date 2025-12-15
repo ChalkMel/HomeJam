@@ -25,6 +25,23 @@ public class PlayerController : MonoBehaviour
     public bool _isGrounded;
     public int _hp;
 
+    private bool _isOnLadder = false;
+    private bool _isClimbing = false;
+
+    public void SetOnLadder(bool onLadder)
+    {
+        _isOnLadder = onLadder;
+        if (!onLadder)
+        {
+            _isClimbing = false;
+        }
+    }
+
+    public void SetClimbing(bool climbing)
+    {
+        _isClimbing = climbing;
+    }
+
     public void Jump()
     {
         if (Input.GetButtonDown("Jump") && _isGrounded)
@@ -62,6 +79,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        if (_isClimbing) 
+            return;
         _currInputX = Input.GetAxis("Horizontal");
         _rb.linearVelocity = new Vector2(_currInputX * speed, _rb.linearVelocity.y);
 
