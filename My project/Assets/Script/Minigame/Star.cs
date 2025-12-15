@@ -5,15 +5,16 @@ public class Star : MonoBehaviour
 {
     public int id;
     public bool isConnected = false;
+    public bool isNoiseStar = false;
     private Image image;
     private Color currentColor;
-    private RectTransform rectTransform;
+    private Color originalColor;
 
     void Start()
     {
         image = GetComponent<Image>();
-        rectTransform = GetComponent<RectTransform>();
         currentColor = image.color;
+        originalColor = currentColor;
     }
 
     public void SetColor(Color color)
@@ -23,6 +24,21 @@ public class Star : MonoBehaviour
             image.color = color;
             currentColor = color;
         }
+    }
+
+    public void SetOriginalColor(Color color)
+    {
+        originalColor = color;
+    }
+
+    public void SaveOriginalColor()
+    {
+        originalColor = currentColor;
+    }
+
+    public void ResetToOriginalColor()
+    {
+        SetColor(originalColor);
     }
 
     public Color GetCurrentColor()
@@ -38,16 +54,6 @@ public class Star : MonoBehaviour
     public void Reset()
     {
         isConnected = false;
-        SetColor(Color.white);
-    }
-
-    // Получаем позицию звезды на экране
-    public Vector3 GetPosition()
-    {
-        if (rectTransform != null)
-        {
-            return rectTransform.position;
-        }
-        return transform.position;
+        ResetToOriginalColor();
     }
 }

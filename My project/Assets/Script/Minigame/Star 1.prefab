@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6676802783369007412}
   - component: {fileID: 1247814002708523369}
   m_Layer: 5
-  m_Name: Star
+  m_Name: Star 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StarPoint
   id: 0
   isConnected: 0
-  isNoiseStar: 0
+  isNoiseStar: 1
 --- !u!222 &5526295832702188290
 CanvasRenderer:
   m_ObjectHideFlags: 0

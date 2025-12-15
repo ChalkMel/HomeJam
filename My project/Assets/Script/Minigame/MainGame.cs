@@ -1,92 +1,102 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class MainGame : MonoBehaviour
 {
-    [Header("Настройки")]
+    [Header("РќР°СЃС‚СЂРѕР№РєРё")]
     public float starDistance = 100f;
+    public float minDistanceBetweenStars = 150f;
     public Color normalColor = Color.white;
     public Color selectedColor = Color.yellow;
     public Color connectedColor = Color.cyan;
-    public Color wrongColor = Color.red; // Цвет для неправильных линий
+    public Color wrongColor = Color.red;
+    public Color noiseStarColor = new Color(0.7f, 0.7f, 0.7f, 1f);
+    public Color noiseStarSelectedColor = new Color(1f, 0.6f, 0.6f, 1f);
+    public Color hintColor = new Color(0.2f, 1f, 0.2f, 1f);
 
-    [Header("Префабы")]
+    [Header("РџСЂРµС„Р°Р±С‹")]
     public GameObject starPrefab;
+    public GameObject noiseStarPrefab;
     public GameObject linePrefab;
     public Transform starsContainer;
+    public Transform noiseStarsContainer;
     public Transform linesContainer;
+
+    [Header("РџРѕРјРµС…Рё")]
+    public int minNoiseStars = 3;
+    public int maxNoiseStars = 8;
+
+    [Header("UI")]
+    public Button hintButton;
 
     [System.Serializable]
     public class Constellation
     {
         public string name;
         public Vector2[] starPositions;
-        public int[] connections; // ТОЛЬКО правильные соединения
+        public int[] connections;
     }
 
-    [Header("Созвездия")]
+    [Header("РЎРѕР·РІРµР·РґРёСЏ")]
     public Constellation[] constellations;
     private int currentIndex = 0;
 
     private List<Star> stars = new List<Star>();
+    private List<Star> noiseStars = new List<Star>();
     private List<Line> lines = new List<Line>();
     private Star selectedStar;
     private bool isDragging = false;
     private Line dragLine;
-    private List<int[]> correctConnections = new List<int[]>(); // Список правильных соединений
+    private List<int[]> correctConnections = new List<int[]>();
+    private bool isHintActive = false;
 
     void Start()
     {
         LoadConstellation(currentIndex);
 
-        // Создаем линию для перетаскивания
         GameObject dragLineObj = Instantiate(linePrefab, linesContainer);
         dragLineObj.name = "DragLine";
         dragLine = dragLineObj.GetComponent<Line>();
         dragLine.SetColor(selectedColor);
         dragLine.Hide();
+
+        if (hintButton != null)
+        {
+            hintButton.onClick.AddListener(ShowHint);
+        }
     }
 
     void Update()
     {
-        // Начало перетаскивания
         if (Input.GetMouseButtonDown(0))
         {
             Star clickedStar = FindStarAtMouse();
             if (clickedStar != null)
             {
                 selectedStar = clickedStar;
-                selectedStar.SetColor(selectedColor);
+                selectedStar.SaveOriginalColor();
+
+                if (selectedStar.isNoiseStar)
+                    selectedStar.SetColor(noiseStarSelectedColor);
+                else
+                    selectedStar.SetColor(selectedColor);
+
                 isDragging = true;
                 dragLine.Show();
             }
         }
 
-        // Перетаскивание
         if (isDragging && selectedStar != null)
         {
             Vector3 mousePos = Input.mousePosition;
             dragLine.Draw(selectedStar.transform.position, mousePos);
 
-            // Подсветка ближайшей звезды
-            Star closest = FindClosestStar(mousePos, selectedStar);
-            foreach (Star star in stars)
-            {
-                if (star == closest && star != selectedStar)
-                {
-                    // Проверяем, правильное ли это соединение
-                    if (IsCorrectConnection(selectedStar.id, star.id))
-                        star.SetColor(selectedColor);
-                    else
-                        star.SetColor(wrongColor);
-                }
-                else if (star != selectedStar && !star.isConnected)
-                    star.SetColor(normalColor);
-            }
+            // РўРћР›Р¬РљРћ РїРѕРґСЃРІРµС‚РєР° РІС‹Р±СЂР°РЅРЅРѕР№ Р·РІРµР·РґС‹, РѕСЃС‚Р°Р»СЊРЅС‹Рµ РІ РѕР±С‹С‡РЅРѕРј С†РІРµС‚Рµ
+            // РќР• РїРѕРґСЃРІРµС‡РёРІР°РµРј РІРѕР·РјРѕР¶РЅС‹Рµ СЃРѕРµРґРёРЅРµРЅРёСЏ Р·Р°СЂР°РЅРµРµ!
+            ResetAllStarsExceptSelected();
         }
 
-        // Конец перетаскивания
         if (Input.GetMouseButtonUp(0) && isDragging)
         {
             if (selectedStar != null)
@@ -96,23 +106,27 @@ public class MainGame : MonoBehaviour
 
                 if (targetStar != null && targetStar != selectedStar)
                 {
-                    // Проверяем, можно ли соединить эти звезды
-                    if (IsCorrectConnection(selectedStar.id, targetStar.id))
+                    // РўРћР›Р¬РљРћ Р—Р”Р•РЎР¬ РїСЂРѕРІРµСЂСЏРµРј РїСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ СЃРѕРµРґРёРЅРµРЅРёСЏ
+                    if (selectedStar.isNoiseStar || targetStar.isNoiseStar)
                     {
+                        // РџРѕРїС‹С‚РєР° СЃРѕРµРґРёРЅРёС‚СЊ СЃ РїРѕРјРµС…РѕР№
+                        ShowWrongConnection(selectedStar, targetStar, true);
+                    }
+                    else if (IsCorrectConnection(selectedStar.id, targetStar.id))
+                    {
+                        // РџСЂР°РІРёР»СЊРЅРѕРµ СЃРѕРµРґРёРЅРµРЅРёРµ
                         ConnectStars(selectedStar, targetStar);
                     }
                     else
                     {
-                        // Неправильное соединение - показываем ошибку
-                        ShowWrongConnection(selectedStar, targetStar);
+                        // РќРµРїСЂР°РІРёР»СЊРЅРѕРµ СЃРѕРµРґРёРЅРµРЅРёРµ
+                        ShowWrongConnection(selectedStar, targetStar, false);
                     }
                 }
-
-                // Сброс цветов
-                foreach (Star star in stars)
+                else
                 {
-                    if (!star.isConnected)
-                        star.SetColor(normalColor);
+                    // РќРµ РїРѕРїР°Р»Рё РЅРё РІ РѕРґРЅСѓ Р·РІРµР·РґСѓ - РїСЂРѕСЃС‚Рѕ СЃР±СЂР°СЃС‹РІР°РµРј
+                    ResetAllStars();
                 }
             }
 
@@ -122,18 +136,133 @@ public class MainGame : MonoBehaviour
         }
     }
 
+    // РџРћР”РЎРљРђР—РљРђ
+    public void ShowHint()
+    {
+        // РџРѕРјРµС…Рё СЃС‚Р°РЅРѕРІСЏС‚СЃСЏ РїРѕР»СѓРїСЂРѕР·СЂР°С‡РЅС‹РјРё
+        foreach (Star noiseStar in noiseStars)
+        {
+            noiseStar.SetColor(new Color(0.5f, 0.5f, 0.5f, 0.3f));
+        }
+
+        // Р—РІРµР·РґС‹ Р±РµР· РЅРµРїРѕРґРєР»СЋС‡РµРЅРЅС‹С… РїСЂР°РІРёР»СЊРЅС‹С… СЃРѕРµРґРёРЅРµРЅРёР№ - РїРѕР»СѓРїСЂРѕР·СЂР°С‡РЅС‹Рµ
+        foreach (Star star in stars)
+        {
+            if (!star.isConnected)
+            {
+                bool hasCorrectConnections = false;
+                foreach (int[] connection in correctConnections)
+                {
+                    if (connection[0] == star.id || connection[1] == star.id)
+                    {
+                        if (!IsConnectionMade(connection[0], connection[1]))
+                        {
+                            hasCorrectConnections = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!hasCorrectConnections)
+                {
+                    star.SetColor(new Color(1f, 1f, 1f, 0.3f));
+                }
+            }
+        }
+
+        // РџСЂР°РІРёР»СЊРЅС‹Рµ Р·РІРµР·РґС‹ РјРёРіР°СЋС‚ Р·РµР»РµРЅС‹Рј
+        StartCoroutine(HighlightCorrectStars());
+
+        Invoke("ResetAfterHint", 3f);
+    }
+
+    System.Collections.IEnumerator HighlightCorrectStars()
+    {
+        List<Star> starsToHighlight = new List<Star>();
+
+        foreach (int[] connection in correctConnections)
+        {
+            if (!IsConnectionMade(connection[0], connection[1]))
+            {
+                Star star1 = stars.Find(s => s.id == connection[0]);
+                Star star2 = stars.Find(s => s.id == connection[1]);
+
+                if (star1 != null && !starsToHighlight.Contains(star1))
+                    starsToHighlight.Add(star1);
+                if (star2 != null && !starsToHighlight.Contains(star2))
+                    starsToHighlight.Add(star2);
+            }
+        }
+
+        // РђРЅРёРјР°С†РёСЏ РјРёРіР°РЅРёСЏ
+        for (int i = 0; i < 6; i++)
+        {
+            foreach (Star star in starsToHighlight)
+            {
+                if (star != null)
+                {
+                    if (i % 2 == 0)
+                        star.SetColor(hintColor);
+                    else
+                        star.SetColor(normalColor);
+                }
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    void ResetAfterHint()
+    {
+        isHintActive = false;
+        ResetAllStars();
+    }
+
+    void ResetAllStarsExceptSelected()
+    {
+        // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚Р° РІСЃРµС… Р·РІРµР·Рґ, РєСЂРѕРјРµ РІС‹Р±СЂР°РЅРЅРѕР№
+        foreach (Star star in stars)
+        {
+            if (star != selectedStar)
+            {
+                if (star.isConnected)
+                    star.SetColor(connectedColor);
+                else
+                    star.SetColor(normalColor);
+            }
+        }
+
+        foreach (Star noiseStar in noiseStars)
+        {
+            if (noiseStar != selectedStar)
+            {
+                noiseStar.ResetToOriginalColor();
+            }
+        }
+    }
+
+    void ResetAllStars()
+    {
+        foreach (Star star in stars)
+        {
+            if (star.isConnected)
+                star.SetColor(connectedColor);
+            else
+                star.SetColor(normalColor);
+        }
+
+        foreach (Star noiseStar in noiseStars)
+        {
+            noiseStar.ResetToOriginalColor();
+        }
+    }
+
     void LoadConstellation(int index)
     {
-        // Очистка
-        foreach (Star star in stars) Destroy(star.gameObject);
-        foreach (Line line in lines) Destroy(line.gameObject);
-        stars.Clear();
-        lines.Clear();
-        correctConnections.Clear();
+        ClearAll();
 
         Constellation constellation = constellations[index];
 
-        // Заполняем список правильных соединений
         for (int i = 0; i < constellation.connections.Length; i += 2)
         {
             int[] connection = new int[2];
@@ -142,7 +271,7 @@ public class MainGame : MonoBehaviour
             correctConnections.Add(connection);
         }
 
-        // Создаем звезды
+        // РћСЃРЅРѕРІРЅС‹Рµ Р·РІРµР·РґС‹
         for (int i = 0; i < constellation.starPositions.Length; i++)
         {
             Vector2 pos = constellation.starPositions[i];
@@ -157,47 +286,123 @@ public class MainGame : MonoBehaviour
 
             Star star = starObj.GetComponent<Star>();
             star.id = i;
+            star.isNoiseStar = false;
+            star.SetOriginalColor(normalColor);
             stars.Add(star);
         }
+
+        // РџРѕРјРµС…Рё
+        CreateNoiseStars();
+
+        if (hintButton != null)
+            hintButton.interactable = true;
     }
 
-    bool IsCorrectConnection(int starId1, int starId2)
+    void CreateNoiseStars()
     {
-        // Проверяем, есть ли такое соединение в списке правильных
-        foreach (int[] connection in correctConnections)
+        int noiseCount = Random.Range(minNoiseStars, maxNoiseStars + 1);
+
+        for (int i = 0; i < noiseCount; i++)
         {
-            if ((connection[0] == starId1 && connection[1] == starId2) ||
-                (connection[0] == starId2 && connection[1] == starId1))
-            {
-                return true;
-            }
+            Vector2 randomPos = GetRandomStarPosition();
+            GameObject noiseObj = Instantiate(noiseStarPrefab, noiseStarsContainer);
+            noiseObj.transform.position = new Vector3(randomPos.x, randomPos.y, 0);
+
+            Star noiseStar = noiseObj.GetComponent<Star>();
+            noiseStar.id = -100 - i;
+            noiseStar.isNoiseStar = true;
+            noiseStar.SetOriginalColor(noiseStarColor);
+            noiseStar.SetColor(noiseStarColor);
+            noiseStars.Add(noiseStar);
         }
-        return false;
     }
 
-    bool IsConnectionMade(int starId1, int starId2)
+    Vector2 GetRandomStarPosition()
     {
-        // Проверяем, уже ли соединены эти звезды
-        foreach (Line line in lines)
+        int attempts = 0;
+        int maxAttempts = 100;
+
+        while (attempts < maxAttempts)
         {
-            if ((line.star1.id == starId1 && line.star2.id == starId2) ||
-                (line.star1.id == starId2 && line.star2.id == starId1))
+            float padding = 0.1f;
+            float x = Random.Range(padding, 1f - padding) * Screen.width;
+            float y = Random.Range(padding, 1f - padding) * Screen.height;
+            Vector2 candidatePos = new Vector2(x, y);
+
+            bool tooClose = false;
+
+            foreach (Star star in stars)
             {
-                return true;
+                float distance = Vector2.Distance(candidatePos, star.transform.position);
+                if (distance < minDistanceBetweenStars)
+                {
+                    tooClose = true;
+                    break;
+                }
             }
+
+            if (!tooClose)
+            {
+                foreach (Star noiseStar in noiseStars)
+                {
+                    float distance = Vector2.Distance(candidatePos, noiseStar.transform.position);
+                    if (distance < minDistanceBetweenStars)
+                    {
+                        tooClose = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!tooClose) return candidatePos;
+            attempts++;
         }
-        return false;
+
+        return new Vector2(
+            Random.Range(0.2f, 0.8f) * Screen.width,
+            Random.Range(0.2f, 0.8f) * Screen.height
+        );
+    }
+
+    void ClearAll()
+    {
+        foreach (Star star in stars) Destroy(star.gameObject);
+        foreach (Star noiseStar in noiseStars) Destroy(noiseStar.gameObject);
+        foreach (Line line in lines) Destroy(line.gameObject);
+
+        stars.Clear();
+        noiseStars.Clear();
+        lines.Clear();
+        correctConnections.Clear();
     }
 
     Star FindStarAtMouse()
     {
         Vector3 mousePos = Input.mousePosition;
+        float closestDistance = starDistance;
+        Star closestStar = null;
+
         foreach (Star star in stars)
         {
-            if (Vector3.Distance(mousePos, star.transform.position) < starDistance)
-                return star;
+            float distance = Vector3.Distance(mousePos, star.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestStar = star;
+            }
         }
-        return null;
+
+        foreach (Star noiseStar in noiseStars)
+        {
+            float distance = Vector3.Distance(mousePos, noiseStar.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestStar = noiseStar;
+            }
+        }
+
+        return closestStar;
     }
 
     Star FindClosestStar(Vector3 position, Star exclude)
@@ -216,16 +421,53 @@ public class MainGame : MonoBehaviour
                 closest = star;
             }
         }
+
+        foreach (Star noiseStar in noiseStars)
+        {
+            if (noiseStar == exclude) continue;
+
+            float distance = Vector3.Distance(position, noiseStar.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = noiseStar;
+            }
+        }
+
         return closest;
+    }
+
+    bool IsCorrectConnection(int starId1, int starId2)
+    {
+        foreach (int[] connection in correctConnections)
+        {
+            if ((connection[0] == starId1 && connection[1] == starId2) ||
+                (connection[0] == starId2 && connection[1] == starId1))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool IsConnectionMade(int starId1, int starId2)
+    {
+        foreach (Line line in lines)
+        {
+            if ((line.star1.id == starId1 && line.star2.id == starId2) ||
+                (line.star1.id == starId2 && line.star2.id == starId1))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void ConnectStars(Star star1, Star star2)
     {
-        // Проверка, не соединены ли уже
         if (IsConnectionMade(star1.id, star2.id))
             return;
 
-        // Создание линии
         GameObject lineObj = Instantiate(linePrefab, linesContainer);
         Line line = lineObj.GetComponent<Line>();
         line.Draw(star1.transform.position, star2.transform.position);
@@ -234,44 +476,50 @@ public class MainGame : MonoBehaviour
         line.SetColor(connectedColor);
         lines.Add(line);
 
-        // Обновление звезд
         star1.Connect();
         star2.Connect();
         star1.SetColor(connectedColor);
         star2.SetColor(connectedColor);
     }
 
-    void ShowWrongConnection(Star star1, Star star2)
+    void ShowWrongConnection(Star star1, Star star2, bool isNoise)
     {
-        // Временная красная линия (исчезает через секунду)
+        // РЎРѕР·РґР°РµРј РІСЂРµРјРµРЅРЅСѓСЋ РєСЂР°СЃРЅСѓСЋ Р»РёРЅРёСЋ
         GameObject lineObj = Instantiate(linePrefab, linesContainer);
         Line line = lineObj.GetComponent<Line>();
         line.Draw(star1.transform.position, star2.transform.position);
-        line.SetColor(wrongColor);
 
-        // Удаляем через секунду
+        if (isNoise)
+            line.SetColor(new Color(1f, 0.5f, 0.5f)); // РЎРІРµС‚Р»Рѕ-РєСЂР°СЃРЅС‹Р№ РґР»СЏ РїРѕРјРµС…
+        else
+            line.SetColor(wrongColor); // РЇСЂРєРѕ-РєСЂР°СЃРЅС‹Р№
+
         Destroy(lineObj, 1f);
 
-        // Мигаем звездами красным
-        StartCoroutine(FlashStarsRed(star1, star2));
+        // РњРёРіР°РµРј Р·РІРµР·РґР°РјРё РєСЂР°СЃРЅС‹Рј
+        StartCoroutine(FlashStars(star1, star2, isNoise));
     }
 
-    System.Collections.IEnumerator FlashStarsRed(Star star1, Star star2)
+    System.Collections.IEnumerator FlashStars(Star star1, Star star2, bool isNoise)
     {
-        Color original1 = star1.GetCurrentColor();
-        Color original2 = star2.GetCurrentColor();
+        Color flashColor = isNoise ? new Color(1f, 0.5f, 0.5f) : wrongColor;
 
-        star1.SetColor(wrongColor);
-        star2.SetColor(wrongColor);
+        star1.SetColor(flashColor);
+        star2.SetColor(flashColor);
 
         yield return new WaitForSeconds(0.5f);
 
-        if (star1.isConnected)
+        // Р’РѕР·РІСЂР°С‰Р°РµРј РЅРѕСЂРјР°Р»СЊРЅС‹Рµ С†РІРµС‚Р°
+        if (star1.isNoiseStar)
+            star1.ResetToOriginalColor();
+        else if (star1.isConnected)
             star1.SetColor(connectedColor);
         else
             star1.SetColor(normalColor);
 
-        if (star2.isConnected)
+        if (star2.isNoiseStar)
+            star2.ResetToOriginalColor();
+        else if (star2.isConnected)
             star2.SetColor(connectedColor);
         else
             star2.SetColor(normalColor);
@@ -279,7 +527,6 @@ public class MainGame : MonoBehaviour
 
     void CheckWin()
     {
-        // Все ли правильные соединения сделаны?
         bool allCorrect = true;
 
         foreach (int[] connection in correctConnections)
@@ -293,13 +540,35 @@ public class MainGame : MonoBehaviour
 
         if (allCorrect)
         {
-            Debug.Log("Созвездие собрано правильно! " + constellations[currentIndex].name);
+            Debug.Log("рџЋ‰ РЎРѕР·РІРµР·РґРёРµ СЃРѕР±СЂР°РЅРѕ!");
 
-            // Блокируем дальнейшие соединения
+            StartCoroutine(NoiseStarsVictoryFlash());
+
             foreach (Star star in stars)
             {
                 star.isConnected = true;
             }
+
+            if (hintButton != null)
+                hintButton.interactable = false;
+        }
+    }
+
+    System.Collections.IEnumerator NoiseStarsVictoryFlash()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            foreach (Star noiseStar in noiseStars)
+            {
+                noiseStar.SetColor(Color.yellow);
+            }
+            yield return new WaitForSeconds(0.2f);
+
+            foreach (Star noiseStar in noiseStars)
+            {
+                noiseStar.ResetToOriginalColor();
+            }
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
