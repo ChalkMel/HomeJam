@@ -41,11 +41,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Light
-    uniqueID: 3843532731
+  - name: Background
+    uniqueID: 3755970429
     locked: 0
-  - name: Darkness
+  - name: Things
     uniqueID: 3836529839
+    locked: 0
+  - name: Player
+    uniqueID: 3843532731
     locked: 0
   m_RenderingLayers:
   - Default
