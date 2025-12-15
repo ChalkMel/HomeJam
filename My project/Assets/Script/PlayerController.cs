@@ -56,8 +56,8 @@ public class PlayerController : MonoBehaviour
     public void GetDamage()
     {
         //_animator.SetBool("IsHit", true);
-        //CheckPointSys checkpointSystem = GetComponent<CheckPointSys>();
-        //checkpointSystem.Respawn();
+        CheckPointSys checkpointSystem = GetComponent<CheckPointSys>();
+        checkpointSystem.Respawn();
     }
 
     private void Move()
@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour
         if (_currInputX != 0)
         {
             _sr.flipX = _currInputX < 0;
-            float rotationZ = _currInputX > 0 ? -90 : 90;
         }
     }
 
