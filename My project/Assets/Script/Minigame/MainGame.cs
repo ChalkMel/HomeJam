@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class MainGame : MonoBehaviour
 {
@@ -67,23 +68,66 @@ public class MainGame : MonoBehaviour
         }
     }
 
+    private bool IsPointerOverUIElement()
+    {
+        // Создаем PointerEventData
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+
+        // Список для результатов raycast
+        List<RaycastResult> results = new List<RaycastResult>();
+
+        // Делаем raycast
+        EventSystem.current.RaycastAll(eventData, results);
+
+        // Проверяем результаты
+        foreach (RaycastResult result in results)
+        {
+            // Игнорируем сами звезды и линии
+            if (result.gameObject.GetComponent<Star>() != null ||
+                result.gameObject.GetComponent<Line>() != null ||
+                result.gameObject.name == "DragLine")
+            {
+                continue;
+            }
+
+            // Если нашли ЛЮБОЙ другой UI элемент (кнопки, текст и т.д.)
+            if (result.gameObject.GetComponent<Selectable>() != null ||
+                result.gameObject.GetComponent<Text>() != null ||
+                result.gameObject.GetComponent<Image>() != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Star clickedStar = FindStarAtMouse();
-            if (clickedStar != null)
+            if (IsPointerOverUIElement())
             {
-                selectedStar = clickedStar;
-                selectedStar.SaveOriginalColor();
+                // Кликнули по UI - игнорируем
+                return;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Star clickedStar = FindStarAtMouse();
+                if (clickedStar != null)
+                {
+                    selectedStar = clickedStar;
+                    selectedStar.SaveOriginalColor();
 
-                if (selectedStar.isNoiseStar)
-                    selectedStar.SetColor(noiseStarSelectedColor);
-                else
-                    selectedStar.SetColor(selectedColor);
+                    if (selectedStar.isNoiseStar)
+                        selectedStar.SetColor(noiseStarSelectedColor);
+                    else
+                        selectedStar.SetColor(selectedColor);
 
-                isDragging = true;
-                dragLine.Show();
+                    isDragging = true;
+                    dragLine.Show();
+                }
             }
         }
 
