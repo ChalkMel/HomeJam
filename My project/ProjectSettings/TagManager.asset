@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - MainDialogueScreen
+  - Dafault
+  - GhostWall
   layers:
   - Default
   - TransparentFX

@@ -1,35 +1,36 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainGame : MonoBehaviour
 {
     [Header("Настройки")]
-    public float starDistance = 100f;
-    public float minDistanceBetweenStars = 150f;
-    public Color normalColor = Color.white;
-    public Color selectedColor = Color.yellow;
-    public Color connectedColor = Color.cyan;
-    public Color wrongColor = Color.red;
-    public Color noiseStarColor = new Color(0.7f, 0.7f, 0.7f, 1f);
-    public Color noiseStarSelectedColor = new Color(1f, 0.6f, 0.6f, 1f);
-    public Color hintColor = new Color(0.2f, 1f, 0.2f, 1f);
+    [SerializeField] private float starDistance = 100f;
+    [SerializeField] private float minDistanceBetweenStars = 150f;
+    [SerializeField] private Color normalColor = Color.white;
+    [SerializeField] private Color selectedColor = Color.yellow;
+    [SerializeField] private Color connectedColor = Color.cyan;
+    [SerializeField] private Color wrongColor = Color.red;
+    [SerializeField] private Color noiseStarColor = new Color(0.7f, 0.7f, 0.7f, 1f);
+    [SerializeField] private Color hintColor = new Color(0.2f, 1f, 0.2f, 1f);
+    [SerializeField] private string nextScene;
 
     [Header("Префабы")]
-    public GameObject starPrefab;
-    public GameObject noiseStarPrefab;
-    public GameObject linePrefab;
-    public Transform starsContainer;
-    public Transform noiseStarsContainer;
-    public Transform linesContainer;
+    [SerializeField] private GameObject starPrefab;
+    [SerializeField] private GameObject noiseStarPrefab;
+    [SerializeField] private GameObject linePrefab;
+    [SerializeField] private Transform starsContainer;
+    [SerializeField] private Transform noiseStarsContainer;
+    [SerializeField] private Transform linesContainer;
 
     [Header("Помехи")]
-    public int minNoiseStars = 3;
-    public int maxNoiseStars = 8;
+    [SerializeField] private int minNoiseStars = 3;
+    [SerializeField] private int maxNoiseStars = 8;
 
     [Header("UI")]
-    public Button hintButton;
+    [SerializeField] private Button hintButton;
 
     [System.Serializable]
     public class Constellation
@@ -40,7 +41,7 @@ public class MainGame : MonoBehaviour
     }
 
     [Header("Созвездия")]
-    public Constellation[] constellations;
+    [SerializeField] private Constellation[] constellations;
     private int currentIndex = 0;
 
     private List<Star> stars = new List<Star>();
@@ -50,11 +51,10 @@ public class MainGame : MonoBehaviour
     private bool isDragging = false;
     private Line dragLine;
     private List<int[]> correctConnections = new List<int[]>();
-    private bool isHintActive = false;
 
-    void Start()
+    private void Start()
     {
-        LoadConstellation(currentIndex);
+        LoadLevel();
 
         GameObject dragLineObj = Instantiate(linePrefab, linesContainer);
         dragLineObj.name = "DragLine";
@@ -63,71 +63,43 @@ public class MainGame : MonoBehaviour
         dragLine.Hide();
 
         if (hintButton != null)
-        {
             hintButton.onClick.AddListener(ShowHint);
-        }
     }
 
-    private bool IsPointerOverUIElement()
+    private bool IsPointerOverUI()
     {
-        // Создаем PointerEventData
         PointerEventData eventData = new PointerEventData(EventSystem.current);
         eventData.position = Input.mousePosition;
-
-        // Список для результатов raycast
         List<RaycastResult> results = new List<RaycastResult>();
-
-        // Делаем raycast
         EventSystem.current.RaycastAll(eventData, results);
 
-        // Проверяем результаты
         foreach (RaycastResult result in results)
         {
-            // Игнорируем сами звезды и линии
             if (result.gameObject.GetComponent<Star>() != null ||
                 result.gameObject.GetComponent<Line>() != null ||
                 result.gameObject.name == "DragLine")
-            {
                 continue;
-            }
 
-            // Если нашли ЛЮБОЙ другой UI элемент (кнопки, текст и т.д.)
             if (result.gameObject.GetComponent<Selectable>() != null ||
                 result.gameObject.GetComponent<Text>() != null ||
                 result.gameObject.GetComponent<Image>() != null)
-            {
                 return true;
-            }
         }
-
         return false;
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !IsPointerOverUI())
         {
-            if (IsPointerOverUIElement())
+            Star clicked = GetStarAtMouse();
+            if (clicked != null)
             {
-                // Кликнули по UI - игнорируем
-                return;
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                Star clickedStar = FindStarAtMouse();
-                if (clickedStar != null)
-                {
-                    selectedStar = clickedStar;
-                    selectedStar.SaveOriginalColor();
-
-                    if (selectedStar.isNoiseStar)
-                        selectedStar.SetColor(noiseStarSelectedColor);
-                    else
-                        selectedStar.SetColor(selectedColor);
-
-                    isDragging = true;
-                    dragLine.Show();
-                }
+                selectedStar = clicked;
+                selectedStar.SaveOriginalColor();
+                selectedStar.SetColor(selectedColor);
+                isDragging = true;
+                dragLine.Show();
             }
         }
 
@@ -135,43 +107,26 @@ public class MainGame : MonoBehaviour
         {
             Vector3 mousePos = Input.mousePosition;
             dragLine.Draw(selectedStar.transform.position, mousePos);
-
-            // ТОЛЬКО подсветка выбранной звезды, остальные в обычном цвете
-            // НЕ подсвечиваем возможные соединения заранее!
-            ResetAllStarsExceptSelected();
+            ResetOtherStars();
         }
 
         if (Input.GetMouseButtonUp(0) && isDragging)
         {
             if (selectedStar != null)
             {
-                Vector3 mousePos = Input.mousePosition;
-                Star targetStar = FindClosestStar(mousePos, selectedStar);
+                Star target = GetClosestStar(Input.mousePosition, selectedStar);
 
-                if (targetStar != null && targetStar != selectedStar)
+                if (target != null && target != selectedStar)
                 {
-                    // ТОЛЬКО ЗДЕСЬ проверяем правильность соединения
-                    if (selectedStar.isNoiseStar || targetStar.isNoiseStar)
-                    {
-                        // Попытка соединить с помехой
-                        ShowWrongConnection(selectedStar, targetStar, true);
-                    }
-                    else if (IsCorrectConnection(selectedStar.id, targetStar.id))
-                    {
-                        // Правильное соединение
-                        ConnectStars(selectedStar, targetStar);
-                    }
+                    if (selectedStar.isNoiseStar || target.isNoiseStar)
+                        ShowWrong(selectedStar, target, true);
+                    else if (IsCorrectPair(selectedStar.id, target.id))
+                        Connect(selectedStar, target);
                     else
-                    {
-                        // Неправильное соединение
-                        ShowWrongConnection(selectedStar, targetStar, false);
-                    }
+                        ShowWrong(selectedStar, target, false);
                 }
                 else
-                {
-                    // Не попали ни в одну звезду - просто сбрасываем
-                    ResetAllStars();
-                }
+                    ResetStars();
             }
 
             isDragging = false;
@@ -180,337 +135,76 @@ public class MainGame : MonoBehaviour
         }
     }
 
-    // ПОДСКАЗКА
-    public void ShowHint()
+    private Star GetStarAtMouse()
     {
-        // Помехи становятся полупрозрачными
-        foreach (Star noiseStar in noiseStars)
-        {
-            noiseStar.SetColor(new Color(0.5f, 0.5f, 0.5f, 0.3f));
-        }
-
-        // Звезды без неподключенных правильных соединений - полупрозрачные
-        foreach (Star star in stars)
-        {
-            if (!star.isConnected)
-            {
-                bool hasCorrectConnections = false;
-                foreach (int[] connection in correctConnections)
-                {
-                    if (connection[0] == star.id || connection[1] == star.id)
-                    {
-                        if (!IsConnectionMade(connection[0], connection[1]))
-                        {
-                            hasCorrectConnections = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (!hasCorrectConnections)
-                {
-                    star.SetColor(new Color(1f, 1f, 1f, 0.3f));
-                }
-            }
-        }
-
-        // Правильные звезды мигают зеленым
-        StartCoroutine(HighlightCorrectStars());
-
-        Invoke("ResetAfterHint", 3f);
+        return GetClosestStar(Input.mousePosition, null);
     }
 
-    System.Collections.IEnumerator HighlightCorrectStars()
-    {
-        List<Star> starsToHighlight = new List<Star>();
-
-        foreach (int[] connection in correctConnections)
-        {
-            if (!IsConnectionMade(connection[0], connection[1]))
-            {
-                Star star1 = stars.Find(s => s.id == connection[0]);
-                Star star2 = stars.Find(s => s.id == connection[1]);
-
-                if (star1 != null && !starsToHighlight.Contains(star1))
-                    starsToHighlight.Add(star1);
-                if (star2 != null && !starsToHighlight.Contains(star2))
-                    starsToHighlight.Add(star2);
-            }
-        }
-
-        // Анимация мигания
-        for (int i = 0; i < 6; i++)
-        {
-            foreach (Star star in starsToHighlight)
-            {
-                if (star != null)
-                {
-                    if (i % 2 == 0)
-                        star.SetColor(hintColor);
-                    else
-                        star.SetColor(normalColor);
-                }
-            }
-
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
-    void ResetAfterHint()
-    {
-        isHintActive = false;
-        ResetAllStars();
-    }
-
-    void ResetAllStarsExceptSelected()
-    {
-        // Восстанавливаем цвета всех звезд, кроме выбранной
-        foreach (Star star in stars)
-        {
-            if (star != selectedStar)
-            {
-                if (star.isConnected)
-                    star.SetColor(connectedColor);
-                else
-                    star.SetColor(normalColor);
-            }
-        }
-
-        foreach (Star noiseStar in noiseStars)
-        {
-            if (noiseStar != selectedStar)
-            {
-                noiseStar.ResetToOriginalColor();
-            }
-        }
-    }
-
-    void ResetAllStars()
-    {
-        foreach (Star star in stars)
-        {
-            if (star.isConnected)
-                star.SetColor(connectedColor);
-            else
-                star.SetColor(normalColor);
-        }
-
-        foreach (Star noiseStar in noiseStars)
-        {
-            noiseStar.ResetToOriginalColor();
-        }
-    }
-
-    void LoadConstellation(int index)
-    {
-        ClearAll();
-
-        Constellation constellation = constellations[index];
-
-        for (int i = 0; i < constellation.connections.Length; i += 2)
-        {
-            int[] connection = new int[2];
-            connection[0] = constellation.connections[i];
-            connection[1] = constellation.connections[i + 1];
-            correctConnections.Add(connection);
-        }
-
-        // Основные звезды
-        for (int i = 0; i < constellation.starPositions.Length; i++)
-        {
-            Vector2 pos = constellation.starPositions[i];
-            Vector3 screenPos = new Vector3(
-                pos.x * Screen.width,
-                pos.y * Screen.height,
-                0
-            );
-
-            GameObject starObj = Instantiate(starPrefab, starsContainer);
-            starObj.transform.position = screenPos;
-
-            Star star = starObj.GetComponent<Star>();
-            star.id = i;
-            star.isNoiseStar = false;
-            star.SetOriginalColor(normalColor);
-            stars.Add(star);
-        }
-
-        // Помехи
-        CreateNoiseStars();
-
-        if (hintButton != null)
-            hintButton.interactable = true;
-    }
-
-    void CreateNoiseStars()
-    {
-        int noiseCount = Random.Range(minNoiseStars, maxNoiseStars + 1);
-
-        for (int i = 0; i < noiseCount; i++)
-        {
-            Vector2 randomPos = GetRandomStarPosition();
-            GameObject noiseObj = Instantiate(noiseStarPrefab, noiseStarsContainer);
-            noiseObj.transform.position = new Vector3(randomPos.x, randomPos.y, 0);
-
-            Star noiseStar = noiseObj.GetComponent<Star>();
-            noiseStar.id = -100 - i;
-            noiseStar.isNoiseStar = true;
-            noiseStar.SetOriginalColor(noiseStarColor);
-            noiseStar.SetColor(noiseStarColor);
-            noiseStars.Add(noiseStar);
-        }
-    }
-
-    Vector2 GetRandomStarPosition()
-    {
-        int attempts = 0;
-        int maxAttempts = 100;
-
-        while (attempts < maxAttempts)
-        {
-            float padding = 0.1f;
-            float x = Random.Range(padding, 1f - padding) * Screen.width;
-            float y = Random.Range(padding, 1f - padding) * Screen.height;
-            Vector2 candidatePos = new Vector2(x, y);
-
-            bool tooClose = false;
-
-            foreach (Star star in stars)
-            {
-                float distance = Vector2.Distance(candidatePos, star.transform.position);
-                if (distance < minDistanceBetweenStars)
-                {
-                    tooClose = true;
-                    break;
-                }
-            }
-
-            if (!tooClose)
-            {
-                foreach (Star noiseStar in noiseStars)
-                {
-                    float distance = Vector2.Distance(candidatePos, noiseStar.transform.position);
-                    if (distance < minDistanceBetweenStars)
-                    {
-                        tooClose = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!tooClose) return candidatePos;
-            attempts++;
-        }
-
-        return new Vector2(
-            Random.Range(0.2f, 0.8f) * Screen.width,
-            Random.Range(0.2f, 0.8f) * Screen.height
-        );
-    }
-
-    void ClearAll()
-    {
-        foreach (Star star in stars) Destroy(star.gameObject);
-        foreach (Star noiseStar in noiseStars) Destroy(noiseStar.gameObject);
-        foreach (Line line in lines) Destroy(line.gameObject);
-
-        stars.Clear();
-        noiseStars.Clear();
-        lines.Clear();
-        correctConnections.Clear();
-    }
-
-    Star FindStarAtMouse()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        float closestDistance = starDistance;
-        Star closestStar = null;
-
-        foreach (Star star in stars)
-        {
-            float distance = Vector3.Distance(mousePos, star.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestStar = star;
-            }
-        }
-
-        foreach (Star noiseStar in noiseStars)
-        {
-            float distance = Vector3.Distance(mousePos, noiseStar.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestStar = noiseStar;
-            }
-        }
-
-        return closestStar;
-    }
-
-    Star FindClosestStar(Vector3 position, Star exclude)
+    private Star GetClosestStar(Vector3 position, Star exclude)
     {
         Star closest = null;
-        float minDistance = starDistance;
+        float minDist = starDistance;
 
-        foreach (Star star in stars)
+        CheckList(stars);
+        CheckList(noiseStars);
+
+        void CheckList(List<Star> starList)
         {
-            if (star == exclude) continue;
-
-            float distance = Vector3.Distance(position, star.transform.position);
-            if (distance < minDistance)
+            foreach (Star star in starList)
             {
-                minDistance = distance;
-                closest = star;
-            }
-        }
-
-        foreach (Star noiseStar in noiseStars)
-        {
-            if (noiseStar == exclude) continue;
-
-            float distance = Vector3.Distance(position, noiseStar.transform.position);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                closest = noiseStar;
+                if (star == exclude) continue;
+                float dist = Vector3.Distance(position, star.transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    closest = star;
+                }
             }
         }
 
         return closest;
     }
 
-    bool IsCorrectConnection(int starId1, int starId2)
+    private void ResetStars()
     {
-        foreach (int[] connection in correctConnections)
-        {
-            if ((connection[0] == starId1 && connection[1] == starId2) ||
-                (connection[0] == starId2 && connection[1] == starId1))
-            {
+        foreach (Star star in stars)
+            star.SetColor(star.isConnected ? connectedColor : normalColor);
+
+        foreach (Star noise in noiseStars)
+            noise.ResetToOriginalColor();
+    }
+
+    private void ResetOtherStars()
+    {
+        foreach (Star star in stars)
+            if (star != selectedStar)
+                star.SetColor(star.isConnected ? connectedColor : normalColor);
+
+        foreach (Star noise in noiseStars)
+            if (noise != selectedStar)
+                noise.ResetToOriginalColor();
+    }
+
+    private bool IsCorrectPair(int id1, int id2)
+    {
+        foreach (int[] pair in correctConnections)
+            if ((pair[0] == id1 && pair[1] == id2) || (pair[0] == id2 && pair[1] == id1))
                 return true;
-            }
-        }
         return false;
     }
 
-    bool IsConnectionMade(int starId1, int starId2)
+    private bool IsPairMade(int id1, int id2)
     {
         foreach (Line line in lines)
-        {
-            if ((line.star1.id == starId1 && line.star2.id == starId2) ||
-                (line.star1.id == starId2 && line.star2.id == starId1))
-            {
+            if ((line.star1.id == id1 && line.star2.id == id2) ||
+                (line.star1.id == id2 && line.star2.id == id1))
                 return true;
-            }
-        }
         return false;
     }
 
-    void ConnectStars(Star star1, Star star2)
+    private void Connect(Star star1, Star star2)
     {
-        if (IsConnectionMade(star1.id, star2.id))
-            return;
+        if (IsPairMade(star1.id, star2.id)) return;
 
         GameObject lineObj = Instantiate(linePrefab, linesContainer);
         Line line = lineObj.GetComponent<Line>();
@@ -526,104 +220,182 @@ public class MainGame : MonoBehaviour
         star2.SetColor(connectedColor);
     }
 
-    void ShowWrongConnection(Star star1, Star star2, bool isNoise)
+    private void ShowWrong(Star star1, Star star2, bool isNoise)
     {
-        // Создаем временную красную линию
         GameObject lineObj = Instantiate(linePrefab, linesContainer);
         Line line = lineObj.GetComponent<Line>();
         line.Draw(star1.transform.position, star2.transform.position);
-
-        if (isNoise)
-            line.SetColor(new Color(1f, 0.5f, 0.5f)); // Светло-красный для помех
-        else
-            line.SetColor(wrongColor); // Ярко-красный
-
+        line.SetColor(isNoise ? new Color(1f, 0.5f, 0.5f) : wrongColor);
         Destroy(lineObj, 1f);
 
-        // Мигаем звездами красным
         StartCoroutine(FlashStars(star1, star2, isNoise));
     }
 
     System.Collections.IEnumerator FlashStars(Star star1, Star star2, bool isNoise)
     {
-        Color flashColor = isNoise ? new Color(1f, 0.5f, 0.5f) : wrongColor;
-
+        Color flashColor = isNoise ? new Color(1f, 1f, 1f) : wrongColor;
         star1.SetColor(flashColor);
         star2.SetColor(flashColor);
 
         yield return new WaitForSeconds(0.5f);
 
-        // Возвращаем нормальные цвета
-        if (star1.isNoiseStar)
-            star1.ResetToOriginalColor();
-        else if (star1.isConnected)
-            star1.SetColor(connectedColor);
-        else
-            star1.SetColor(normalColor);
+        if (star1.isNoiseStar) star1.ResetToOriginalColor();
+        else star1.SetColor(star1.isConnected ? connectedColor : normalColor);
 
-        if (star2.isNoiseStar)
-            star2.ResetToOriginalColor();
-        else if (star2.isConnected)
-            star2.SetColor(connectedColor);
-        else
-            star2.SetColor(normalColor);
+        if (star2.isNoiseStar) star2.ResetToOriginalColor();
+        else star2.SetColor(star2.isConnected ? connectedColor : normalColor);
     }
 
-    void CheckWin()
+    private void LoadLevel()
     {
-        bool allCorrect = true;
+        ClearAll();
+        Constellation constellation = constellations[currentIndex];
 
-        foreach (int[] connection in correctConnections)
+        for (int i = 0; i < constellation.connections.Length; i += 2)
+            correctConnections.Add(new int[] {
+                constellation.connections[i],
+                constellation.connections[i + 1]
+            });
+
+        for (int i = 0; i < constellation.starPositions.Length; i++)
         {
-            if (!IsConnectionMade(connection[0], connection[1]))
-            {
-                allCorrect = false;
-                break;
-            }
+            Vector2 pos = constellation.starPositions[i];
+            Vector3 screenPos = new Vector3(pos.x * Screen.width, pos.y * Screen.height, 0);
+
+            GameObject starObj = Instantiate(starPrefab, starsContainer);
+            starObj.transform.position = screenPos;
+
+            Star star = starObj.GetComponent<Star>();
+            star.id = i;
+            star.isNoiseStar = false;
+            star.SetOriginalColor(normalColor);
+            stars.Add(star);
         }
 
-        if (allCorrect)
-        {
-            Debug.Log("🎉 Созвездие собрано!");
+        CreateNoiseStars();
+        if (hintButton != null) hintButton.interactable = true;
+    }
 
-            StartCoroutine(NoiseStarsVictoryFlash());
+    private void CreateNoiseStars()
+    {
+        int count = Random.Range(minNoiseStars, maxNoiseStars + 1);
+
+        for (int i = 0; i < count; i++)
+        {
+            Vector2 pos = GetRandomPosition();
+            GameObject noiseObj = Instantiate(noiseStarPrefab, noiseStarsContainer);
+            noiseObj.transform.position = new Vector3(pos.x, pos.y, 0);
+
+            Star noiseStar = noiseObj.GetComponent<Star>();
+            noiseStar.id = -100 - i;
+            noiseStar.isNoiseStar = true;
+            noiseStar.SetOriginalColor(noiseStarColor);
+            noiseStar.SetColor(noiseStarColor);
+            noiseStars.Add(noiseStar);
+        }
+    }
+
+    private Vector2 GetRandomPosition()
+    {
+        for (int attempt = 0; attempt < 100; attempt++)
+        {
+            float padding = 0.1f;
+            float x = Random.Range(padding, 1f - padding) * Screen.width;
+            float y = Random.Range(padding, 1f - padding) * Screen.height;
+            Vector2 pos = new Vector2(x, y);
+
+            bool farEnough = true;
 
             foreach (Star star in stars)
-            {
-                star.isConnected = true;
-            }
+                if (Vector2.Distance(pos, star.transform.position) < minDistanceBetweenStars)
+                { farEnough = false; break; }
 
-            if (hintButton != null)
-                hintButton.interactable = false;
+            foreach (Star noise in noiseStars)
+                if (Vector2.Distance(pos, noise.transform.position) < minDistanceBetweenStars)
+                { farEnough = false; break; }
+
+            if (farEnough) return pos;
         }
+
+        return new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
     }
 
-    System.Collections.IEnumerator NoiseStarsVictoryFlash()
+    private void ClearAll()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            foreach (Star noiseStar in noiseStars)
-            {
-                noiseStar.SetColor(Color.yellow);
-            }
-            yield return new WaitForSeconds(0.2f);
+        foreach (Star star in stars) Destroy(star.gameObject);
+        foreach (Star noise in noiseStars) Destroy(noise.gameObject);
+        foreach (Line line in lines) Destroy(line.gameObject);
 
-            foreach (Star noiseStar in noiseStars)
+        stars.Clear();
+        noiseStars.Clear();
+        lines.Clear();
+        correctConnections.Clear();
+    }
+
+    private void CheckWin()
+    {
+        foreach (int[] pair in correctConnections)
+            if (!IsPairMade(pair[0], pair[1]))
+                return;
+
+        Debug.Log("Созвездие собрано");
+        SceneManager.LoadScene(nextScene);
+    }
+
+    public void ShowHint()
+    {
+        foreach (Star noise in noiseStars)
+            noise.SetColor(new Color(0.5f, 0.5f, 0.5f, 0.3f));
+
+        foreach (Star star in stars)
+        {
+            bool hasUnmadeConnections = false;
+            foreach (int[] pair in correctConnections)
             {
-                noiseStar.ResetToOriginalColor();
+                if ((pair[0] == star.id || pair[1] == star.id) && !IsPairMade(pair[0], pair[1]))
+                { hasUnmadeConnections = true; break; }
             }
-            yield return new WaitForSeconds(0.2f);
+
+            if (!hasUnmadeConnections)
+                star.SetColor(new Color(1f, 1f, 1f, 0.3f));
+        }
+
+        StartCoroutine(BlinkCorrectStars());
+        Invoke("ResetStars", 3f);
+    }
+
+    private System.Collections.IEnumerator BlinkCorrectStars()
+    {
+        List<Star> toBlink = new List<Star>();
+
+        foreach (int[] pair in correctConnections)
+        {
+            if (IsPairMade(pair[0], pair[1])) continue;
+
+            Star s1 = stars.Find(s => s.id == pair[0]);
+            Star s2 = stars.Find(s => s.id == pair[1]);
+
+            if (s1 != null && !toBlink.Contains(s1)) toBlink.Add(s1);
+            if (s2 != null && !toBlink.Contains(s2)) toBlink.Add(s2);
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            foreach (Star star in toBlink)
+                star.SetColor(i % 2 == 0 ? hintColor : normalColor);
+
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
     public void NextLevel()
     {
         currentIndex = (currentIndex + 1) % constellations.Length;
-        LoadConstellation(currentIndex);
+        LoadLevel();
     }
 
     public void Restart()
     {
-        LoadConstellation(currentIndex);
+        LoadLevel();
     }
 }

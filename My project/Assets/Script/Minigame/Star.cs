@@ -10,7 +10,7 @@ public class Star : MonoBehaviour
     private Color currentColor;
     private Color originalColor;
 
-    void Start()
+    private void Start()
     {
         image = GetComponent<Image>();
         currentColor = image.color;
