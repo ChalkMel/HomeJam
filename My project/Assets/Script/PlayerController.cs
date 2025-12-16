@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-//[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private SpriteRenderer _sr;
     private Rigidbody2D _rb;
-    //private Animator _animator; 
+    private Animator _animator; 
     private float _currInputX;
     public bool _isGrounded;
     public int _hp;
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && _isGrounded)
         {
             _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            //_animator.SetBool("IsJumping", true);
+            _animator.SetBool("IsJumping", true);
         }
     }
 
@@ -58,8 +58,7 @@ public class PlayerController : MonoBehaviour
             if (contact.normal.y > 0.5f)
             {
                 _isGrounded = true;
-                //_animator.SetBool("IsJumping", false);
-                //_animator.SetBool("IsFalling", false);
+                _animator.SetBool("IsJumping", false);
                 break;
             }
         }
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     public void GetDamage()
     {
-        //_animator.SetBool("IsHit", true);
+        _animator.SetBool("IsHit", true);
         CheckPointSys checkpointSystem = GetComponent<CheckPointSys>();
         checkpointSystem.Respawn();
     }
@@ -84,8 +83,8 @@ public class PlayerController : MonoBehaviour
         _currInputX = Input.GetAxis("Horizontal");
         _rb.linearVelocity = new Vector2(_currInputX * speed, _rb.linearVelocity.y);
 
-        //bool isRunning = Mathf.Abs(_currInputX) > 0.1f && _isGrounded;
-        //_animator.SetBool("IsRunning", isRunning);
+        bool isRunning = Mathf.Abs(_currInputX) > 0.1f && _isGrounded;
+        _animator.SetBool("IsRunning", isRunning);
 
         if (_currInputX != 0)
         {
@@ -97,33 +96,28 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
-        //UpdateAnimationStates();
+        UpdateAnimationStates();
     }
 
-    //private void UpdateAnimationStates()
-    //{
-    //    _animator.SetFloat("YVelocity", _rb.linearVelocity.y);
+    private void UpdateAnimationStates()
+    {
 
-    //    if (!_isGrounded && _rb.linearVelocity.y < -0.1f)
-    //    {
-    //        _animator.SetBool("IsFalling", true);
-    //    }
-    //    else if (!_isGrounded && _rb.linearVelocity.y > 0.1f)
-    //    {
-    //        _animator.SetBool("IsJumping", true);
-    //    }
+         if (!_isGrounded && _rb.linearVelocity.y > 0.1f)
+        {
+            _animator.SetBool("IsJumping", true);
+        }
 
-    //    if (_isGrounded && Mathf.Abs(_currInputX) < 0.1f)
-    //    {
-    //        _animator.SetBool("IsRunning", false);
-    //    }
-    //}
+        if (_isGrounded && Mathf.Abs(_currInputX) < 0.1f)
+        {
+            _animator.SetBool("IsRunning", false);
+        }
+    }
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
-        //_animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
 }

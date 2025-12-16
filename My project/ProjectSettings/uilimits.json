@@ -1,0 +1,6 @@
+{
+  "ui-toolkit": {
+    "text-job-max-thread-count": 1,
+    "disable-text-jobs": true
+  }
+}
