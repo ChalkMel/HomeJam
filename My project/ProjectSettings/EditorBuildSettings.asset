@@ -5,15 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Gametest.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 12c81e3fa97d13f4ba8e75b11c537726
   - enabled: 1
     path: Assets/Scenes/Game.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    guid: ac7dd7ccf31cfc7429dec827642125a2
   - enabled: 1
     path: Assets/Scenes/Major Ursu.unity
     guid: 3a957b8b6d62ce4418f75ca1a7b92e19
   - enabled: 1
     path: Assets/Scenes/Orion.unity
     guid: c9417e7233c130b47a66a83edf961ed4
+  - enabled: 1
+    path: Assets/Scenes/Final.unity
+    guid: a1e4d7e28e29f184fae12cce2fe436be
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

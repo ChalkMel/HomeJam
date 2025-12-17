@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float speed;
     public float jumpForce;
+    public float baseJump;
+    public float baseSpeed;
     [Header("Ground check")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float animationDelay = 0.5f;
 
+    private AudioSource _as;
     private SpriteRenderer _sr;
     private Rigidbody2D _rb;
     private Animator _animator; 
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
     public void GetDamage()
     {
+        _as.Play();
         _animator.Play("Death");
         float animationLength = _animator.GetCurrentAnimatorStateInfo(0).length - animationDelay;
         Invoke(nameof(Respawn), animationLength);
@@ -120,9 +124,12 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        baseJump = jumpForce;
+        baseSpeed = speed;
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _as = GetComponent<AudioSource>();
     }
 
 }

@@ -39,8 +39,6 @@ public class Charm : MonoBehaviour
 
     IEnumerator DamageTimer()
     {
-        Debug.Log($"Начинаем отсчет: {requiredTime} секунд");
-
         while (isPlayerInside && timer < requiredTime)
         {
             timer += Time.deltaTime;

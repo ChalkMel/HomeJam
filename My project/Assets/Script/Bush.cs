@@ -1,61 +1,105 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using System.Collections;
 
 public class Bush : MonoBehaviour
 {
     [SerializeField] private float addForce = 1.5f;
+    [SerializeField] private float addSpeed = 1.5f;
     [SerializeField] private float boostDuration = 3f;
     [SerializeField] private float respawnDuration = 10f;
     [SerializeField] private GameObject lig;
     [SerializeField] private Sprite eaten;
+    [SerializeField] private GameObject fBtn;
 
-    private Sprite start;
-    private bool _isInteractable;
+    private float originalJumpForce;
+    private float originalSpeed;
+    private AudioSource audioSource;
+    private Sprite _startSprite;
+    public bool _isInteractable = true;
     private SpriteRenderer _rend;
+    private bool _isInTrigger;
+    private PlayerController player;
+    private SpriteRenderer _playerRend;
 
     private void Awake()
     {
-        _isInteractable = true;
+        audioSource = GetComponent<AudioSource>();
         _rend = GetComponent<SpriteRenderer>();
-        start = _rend.sprite;
+        _startSprite = _rend.sprite;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void Update()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!_isInTrigger || !_isInteractable) return;
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if (_isInteractable)
-            {
-                PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-                SpriteRenderer rendPl = collision.GetComponent<SpriteRenderer>();
-                StartCoroutine(ApplyBoost(player, rendPl));
-                
-                rendPl.color = new Color(1,1,1, 0.5f);
-            }
-            else return;
+            Eat();
         }
     }
 
-    private System.Collections.IEnumerator ApplyBoost(PlayerController player, SpriteRenderer rendPl)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player")) return;
+
+        _isInTrigger = true;
+        player = collision.GetComponent<PlayerController>();
+        _playerRend = collision.GetComponent<SpriteRenderer>();
+
+        if (_isInteractable && fBtn)
+            fBtn.SetActive(true);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player")) return;
+        _isInTrigger = false;
+        if (fBtn) 
+            fBtn.SetActive(false);
+    }
+
+    private void Eat()
+    {
+        if (!_isInteractable) 
+            return;
+
+        StartCoroutine(ApplyBoostCoroutine());
+    }
+
+    public IEnumerator ApplyBoostCoroutine()
     {
         _isInteractable = false;
-        _rend.sprite = eaten;
-        lig.SetActive(false);
-        float originalJumpForce = player.jumpForce;
+
+        audioSource.Play();
+        if (_rend) _rend.sprite = eaten;
+        if (lig) lig.SetActive(false);
+        if (fBtn) fBtn.SetActive(false);
+
+        originalJumpForce = player.jumpForce;
+        originalSpeed = player.speed;
         player.jumpForce += addForce;
+        player.speed *= addSpeed;
+        _playerRend.color = new Color(1, 1, 1, 0.5f);
+
         yield return new WaitForSeconds(boostDuration);
-        player.jumpForce = originalJumpForce;
-        rendPl.color = new Color(1, 1, 1, 1f);
-        StartCoroutine(Respawn());
-        StopCoroutine(ApplyBoost(player, rendPl));
-        Debug.Log("Start Respawn");
+        Stop();
+        _playerRend.color = Color.white;
+
+        StartCoroutine(RespawnCoroutine());
     }
-    private System.Collections.IEnumerator Respawn()
+
+    private IEnumerator RespawnCoroutine()
     {
         yield return new WaitForSeconds(respawnDuration);
+
         _isInteractable = true;
+
+        _rend.sprite = _startSprite;
         lig.SetActive(true);
-        _rend.sprite = start;
-        StopCoroutine(Respawn());
-        Debug.Log("End Respawn");
+    }
+    public void Stop()
+    {
+        player.jumpForce = player.baseJump;
+        player.speed = player.baseSpeed;
     }
 }

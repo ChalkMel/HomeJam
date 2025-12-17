@@ -1,0 +1,1994 @@
+fileFormatVersion: 2
+guid: 074a255cf47b8eb499803f2574565f16
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7570995445559276046
+    second: Star1V2-Sheet_0
+  - first:
+      213: 2802605361299583270
+    second: Star1V2-Sheet_1
+  - first:
+      213: -1690226353316229740
+    second: Star1V2-Sheet_2
+  - first:
+      213: -2830618950160376570
+    second: Star1V2-Sheet_3
+  - first:
+      213: 6896562146714181395
+    second: Star1V2-Sheet_4
+  - first:
+      213: 7743925262423734383
+    second: Star1V2-Sheet_5
+  - first:
+      213: -8849011321518420538
+    second: Star1V2-Sheet_6
+  - first:
+      213: 267779126517384975
+    second: Star1V2-Sheet_7
+  - first:
+      213: -6921140470220590664
+    second: Star1V2-Sheet_8
+  - first:
+      213: 8702565076508190088
+    second: Star1V2-Sheet_9
+  - first:
+      213: -2679079101244810603
+    second: Star1V2-Sheet_10
+  - first:
+      213: 3498297611424524534
+    second: Star1V2-Sheet_11
+  - first:
+      213: -5583246954580527131
+    second: Star1V2-Sheet_12
+  - first:
+      213: 8747722413763110578
+    second: Star1V2-Sheet_13
+  - first:
+      213: -1554401889425022378
+    second: Star1V2-Sheet_14
+  - first:
+      213: 5450801460473717691
+    second: Star1V2-Sheet_15
+  - first:
+      213: -1762338762727216145
+    second: Star1V2-Sheet_16
+  - first:
+      213: 8446548452031208653
+    second: Star1V2-Sheet_17
+  - first:
+      213: -8736261226128335550
+    second: Star1V2-Sheet_18
+  - first:
+      213: 7360335110429003517
+    second: Star1V2-Sheet_19
+  - first:
+      213: -8123739230581538483
+    second: Star1V2-Sheet_20
+  - first:
+      213: 6853531553930408704
+    second: Star1V2-Sheet_21
+  - first:
+      213: -3961274722288067863
+    second: Star1V2-Sheet_22
+  - first:
+      213: 7239432186177079354
+    second: Star1V2-Sheet_23
+  - first:
+      213: 5441724953723693762
+    second: Star1V2-Sheet_24
+  - first:
+      213: 6885112378624872707
+    second: Star1V2-Sheet_25
+  - first:
+      213: -4048171865140666818
+    second: Star1V2-Sheet_26
+  - first:
+      213: 1185452069450795341
+    second: Star1V2-Sheet_27
+  - first:
+      213: -1550327138640964988
+    second: Star1V2-Sheet_28
+  - first:
+      213: 3644568116239983421
+    second: Star1V2-Sheet_29
+  - first:
+      213: 8151059642977223434
+    second: Star1V2-Sheet_30
+  - first:
+      213: 155883225015739120
+    second: Star1V2-Sheet_31
+  - first:
+      213: -3051498923343807573
+    second: Star1V2-Sheet_32
+  - first:
+      213: -507206853455445577
+    second: Star1V2-Sheet_33
+  - first:
+      213: 4312596609777012160
+    second: Star1V2-Sheet_34
+  - first:
+      213: -7138419699765766493
+    second: Star1V2-Sheet_35
+  - first:
+      213: 4027303329702342028
+    second: Star1V2-Sheet_36
+  - first:
+      213: 672130993807129853
+    second: Star1V2-Sheet_37
+  - first:
+      213: 7456963189647871234
+    second: Star1V2-Sheet_38
+  - first:
+      213: -9103011869362780766
+    second: Star1V2-Sheet_39
+  - first:
+      213: 5345351879434846587
+    second: Star1V2-Sheet_40
+  - first:
+      213: -5120465553033959925
+    second: Star1V2-Sheet_41
+  - first:
+      213: -720181022638631817
+    second: Star1V2-Sheet_42
+  - first:
+      213: -3064599223964071022
+    second: Star1V2-Sheet_43
+  - first:
+      213: -84621676428940906
+    second: Star1V2-Sheet_44
+  - first:
+      213: 1590190051619607350
+    second: Star1V2-Sheet_45
+  - first:
+      213: -6607467225617534338
+    second: Star1V2-Sheet_46
+  - first:
+      213: 2390240223263797124
+    second: Star1V2-Sheet_47
+  - first:
+      213: -318776327557716979
+    second: Star1V2-Sheet_48
+  - first:
+      213: -5742462261144802636
+    second: Star1V2-Sheet_49
+  - first:
+      213: 2266464756273134674
+    second: Star1V2-Sheet_50
+  - first:
+      213: 72548599808099774
+    second: Star1V2-Sheet_51
+  - first:
+      213: 4506874627841141572
+    second: Star1V2-Sheet_52
+  - first:
+      213: 6430121895970869392
+    second: Star1V2-Sheet_53
+  - first:
+      213: 7623365174638024242
+    second: Star1V2-Sheet_54
+  - first:
+      213: -9002363474296118777
+    second: Star1V2-Sheet_55
+  - first:
+      213: -5169704631251191470
+    second: Star1V2-Sheet_56
+  - first:
+      213: -8741224815411712648
+    second: Star1V2-Sheet_57
+  - first:
+      213: 2339849714304096364
+    second: Star1V2-Sheet_58
+  - first:
+      213: -7043454174483121858
+    second: Star1V2-Sheet_59
+  - first:
+      213: 2130614216159853402
+    second: Star1V2-Sheet_60
+  - first:
+      213: -6148582410527249105
+    second: Star1V2-Sheet_61
+  - first:
+      213: -39773846997445413
+    second: Star1V2-Sheet_62
+  - first:
+      213: 7097465337239107641
+    second: Star1V2-Sheet_63
+  - first:
+      213: 7087257737915007385
+    second: Star1V2-Sheet_64
+  - first:
+      213: -6020633688994146082
+    second: Star1V2-Sheet_65
+  - first:
+      213: -4029718026941062685
+    second: Star1V2-Sheet_66
+  - first:
+      213: 2913291596322832040
+    second: Star1V2-Sheet_67
+  - first:
+      213: -260268329954710411
+    second: Star1V2-Sheet_68
+  - first:
+      213: -283695888631169802
+    second: Star1V2-Sheet_69
+  - first:
+      213: 8011055136322977026
+    second: Star1V2-Sheet_70
+  - first:
+      213: 3229402798318860234
+    second: Star1V2-Sheet_71
+  - first:
+      213: 2185906090825600568
+    second: Star1V2-Sheet_72
+  - first:
+      213: -1988713945477684528
+    second: Star1V2-Sheet_73
+  - first:
+      213: -4535735353485380241
+    second: Star1V2-Sheet_74
+  - first:
+      213: 7627393930091089435
+    second: Star1V2-Sheet_75
+  - first:
+      213: -2260896304254871111
+    second: Star1V2-Sheet_76
+  - first:
+      213: 2499217638248931666
+    second: Star1V2-Sheet_77
+  - first:
+      213: -1012575021411248969
+    second: Star1V2-Sheet_78
+  - first:
+      213: -2058357472473760145
+    second: Star1V2-Sheet_79
+  - first:
+      213: -3255945491049654260
+    second: Star1V2-Sheet_80
+  - first:
+      213: 2486608185107183709
+    second: Star1V2-Sheet_81
+  - first:
+      213: -3905631242137458821
+    second: Star1V2-Sheet_82
+  - first:
+      213: -5721300022887694936
+    second: Star1V2-Sheet_83
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Star1V2-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fdc65f41cb6ee690800000000000000
+      internalID: -7570995445559276046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 621fddd2abad4e620800000000000000
+      internalID: 2802605361299583270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49d059c361c1b88e0800000000000000
+      internalID: -1690226353316229740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60d9335ef0f97b8d0800000000000000
+      internalID: -2830618950160376570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31fdd4e9bb285bf50800000000000000
+      internalID: 6896562146714181395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f68b0f14ff2f77b60800000000000000
+      internalID: 7743925262423734383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cd0c7f461ff13580800000000000000
+      internalID: -8849011321518420538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07455262b757b300800000000000000
+      internalID: 267779126517384975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b1fbef796b23ff90800000000000000
+      internalID: -6921140470220590664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 885adf334d8b5c870800000000000000
+      internalID: 8702565076508190088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59a512570cff1dad0800000000000000
+      internalID: -2679079101244810603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f86e8f84237c8030800000000000000
+      internalID: 3498297611424524534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e732f2e9725482b0800000000000000
+      internalID: -5583246954580527131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b6a21a1037266970800000000000000
+      internalID: 8747722413763110578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65220a697b7ad6ae0800000000000000
+      internalID: -1554401889425022378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb367b87c0325ab40800000000000000
+      internalID: 5450801460473717691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: feb2eb98b3aea87e0800000000000000
+      internalID: -1762338762727216145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcc127db01b283570800000000000000
+      internalID: 8446548452031208653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24d1a9793b092c680800000000000000
+      internalID: -8736261226128335550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfec4f449c9252660800000000000000
+      internalID: 7360335110429003517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d414841163ea24f80800000000000000
+      internalID: -8123739230581538483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 003f3f003a2ac1f50800000000000000
+      internalID: 6853531553930408704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ea1948b0a9b609c0800000000000000
+      internalID: -3961274722288067863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a384d989731a77460800000000000000
+      internalID: 7239432186177079354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ca64109304e48b40800000000000000
+      internalID: 5441724953723693762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 301949eba35dc8f50800000000000000
+      internalID: 6885112378624872707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3e5f84032102d7c0800000000000000
+      internalID: -4048171865140666818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d49cdd95062937010800000000000000
+      internalID: 1185452069450795341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48258af6ea12c7ae0800000000000000
+      internalID: -1550327138640964988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 1856
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d33e238546b149230800000000000000
+      internalID: 3644568116239983421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a030ea22f816e1170800000000000000
+      internalID: 8151059642977223434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 1984
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f2618d97fec92200800000000000000
+      internalID: 155883225015739120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: babfa9195e5e6a5d0800000000000000
+      internalID: -3051498923343807573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 2112
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b10528dd0a06f8f0800000000000000
+      internalID: -507206853455445577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 2176
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cd005974cb69db30800000000000000
+      internalID: 4312596609777012160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a69fc1aa1d3fec90800000000000000
+      internalID: -7138419699765766493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8de7a17a0bd3e730800000000000000
+      internalID: 4027303329702342028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 2368
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfc7768e393e35900800000000000000
+      internalID: 672130993807129853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20d002623847c7760800000000000000
+      internalID: 7456963189647871234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a587744fea9ba180800000000000000
+      internalID: -9103011869362780766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b714e25a6318e2a40800000000000000
+      internalID: 5345351879434846587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0669ca75b370f8b0800000000000000
+      internalID: -5120465553033959925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77495a3fc276106f0800000000000000
+      internalID: -720181022638631817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_43
+      rect:
+        serializedVersion: 2
+        x: 2752
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29b0fa42e3b5875d0800000000000000
+      internalID: -3064599223964071022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_44
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 699a72c980d53def0800000000000000
+      internalID: -84621676428940906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_45
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63395204d6d711610800000000000000
+      internalID: 1590190051619607350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_46
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e72f700f09f8d44a0800000000000000
+      internalID: -6607467225617534338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_47
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48f2d7ba1d6db2120800000000000000
+      internalID: 2390240223263797124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_48
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d046e197e9a739bf0800000000000000
+      internalID: -318776327557716979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_49
+      rect:
+        serializedVersion: 2
+        x: 3136
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4baa0649ffcae40b0800000000000000
+      internalID: -5742462261144802636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_50
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25c3a9500b9147f10800000000000000
+      internalID: 2266464756273134674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_51
+      rect:
+        serializedVersion: 2
+        x: 3264
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb58380319eb10100800000000000000
+      internalID: 72548599808099774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_52
+      rect:
+        serializedVersion: 2
+        x: 3328
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44b21b77892ab8e30800000000000000
+      internalID: 4506874627841141572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_53
+      rect:
+        serializedVersion: 2
+        x: 3392
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0901ecfcbc16c3950800000000000000
+      internalID: 6430121895970869392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_54
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 236126b6c32abc960800000000000000
+      internalID: 7623365174638024242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_55
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 702e0afdd1e211380800000000000000
+      internalID: -9002363474296118777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_56
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 259b49437058148b0800000000000000
+      internalID: -5169704631251191470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_57
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87d2e87e75ee0b680800000000000000
+      internalID: -8741224815411712648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_58
+      rect:
+        serializedVersion: 2
+        x: 3712
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6815e80be0d87020800000000000000
+      internalID: 2339849714304096364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_59
+      rect:
+        serializedVersion: 2
+        x: 3776
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e39f0320fbf904e90800000000000000
+      internalID: -7043454174483121858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_60
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5bfa935756719d10800000000000000
+      internalID: 2130614216159853402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_61
+      rect:
+        serializedVersion: 2
+        x: 3904
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2dee4ccfd8dbaaa0800000000000000
+      internalID: -6148582410527249105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_62
+      rect:
+        serializedVersion: 2
+        x: 3968
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd4dd5a95e1b27ff0800000000000000
+      internalID: -39773846997445413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_63
+      rect:
+        serializedVersion: 2
+        x: 4032
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 938f8c7ce134f7260800000000000000
+      internalID: 7097465337239107641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_64
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 991001cdc5ffa5260800000000000000
+      internalID: 7087257737915007385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_65
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed811ccfe89627ca0800000000000000
+      internalID: -6020633688994146082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_66
+      rect:
+        serializedVersion: 2
+        x: 4224
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e1a03b0ec09318c0800000000000000
+      internalID: -4029718026941062685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_67
+      rect:
+        serializedVersion: 2
+        x: 4288
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8aef3f585471e6820800000000000000
+      internalID: 2913291596322832040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_68
+      rect:
+        serializedVersion: 2
+        x: 4352
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57ce3c63557536cf0800000000000000
+      internalID: -260268329954710411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star1V2-Sheet_69
+      rect:
+        serializedVersion: 2
+        x: 4416
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fc76e5a71c101cf0800000000000000
+      internalID: -283695888631169802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d3b044cd4b7069043a83c8e0358f2bf6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":69.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Star1V2-Sheet_0: -7570995445559276046
+      Star1V2-Sheet_1: 2802605361299583270
+      Star1V2-Sheet_10: -2679079101244810603
+      Star1V2-Sheet_11: 3498297611424524534
+      Star1V2-Sheet_12: -5583246954580527131
+      Star1V2-Sheet_13: 8747722413763110578
+      Star1V2-Sheet_14: -1554401889425022378
+      Star1V2-Sheet_15: 5450801460473717691
+      Star1V2-Sheet_16: -1762338762727216145
+      Star1V2-Sheet_17: 8446548452031208653
+      Star1V2-Sheet_18: -8736261226128335550
+      Star1V2-Sheet_19: 7360335110429003517
+      Star1V2-Sheet_2: -1690226353316229740
+      Star1V2-Sheet_20: -8123739230581538483
+      Star1V2-Sheet_21: 6853531553930408704
+      Star1V2-Sheet_22: -3961274722288067863
+      Star1V2-Sheet_23: 7239432186177079354
+      Star1V2-Sheet_24: 5441724953723693762
+      Star1V2-Sheet_25: 6885112378624872707
+      Star1V2-Sheet_26: -4048171865140666818
+      Star1V2-Sheet_27: 1185452069450795341
+      Star1V2-Sheet_28: -1550327138640964988
+      Star1V2-Sheet_29: 3644568116239983421
+      Star1V2-Sheet_3: -2830618950160376570
+      Star1V2-Sheet_30: 8151059642977223434
+      Star1V2-Sheet_31: 155883225015739120
+      Star1V2-Sheet_32: -3051498923343807573
+      Star1V2-Sheet_33: -507206853455445577
+      Star1V2-Sheet_34: 4312596609777012160
+      Star1V2-Sheet_35: -7138419699765766493
+      Star1V2-Sheet_36: 4027303329702342028
+      Star1V2-Sheet_37: 672130993807129853
+      Star1V2-Sheet_38: 7456963189647871234
+      Star1V2-Sheet_39: -9103011869362780766
+      Star1V2-Sheet_4: 6896562146714181395
+      Star1V2-Sheet_40: 5345351879434846587
+      Star1V2-Sheet_41: -5120465553033959925
+      Star1V2-Sheet_42: -720181022638631817
+      Star1V2-Sheet_43: -3064599223964071022
+      Star1V2-Sheet_44: -84621676428940906
+      Star1V2-Sheet_45: 1590190051619607350
+      Star1V2-Sheet_46: -6607467225617534338
+      Star1V2-Sheet_47: 2390240223263797124
+      Star1V2-Sheet_48: -318776327557716979
+      Star1V2-Sheet_49: -5742462261144802636
+      Star1V2-Sheet_5: 7743925262423734383
+      Star1V2-Sheet_50: 2266464756273134674
+      Star1V2-Sheet_51: 72548599808099774
+      Star1V2-Sheet_52: 4506874627841141572
+      Star1V2-Sheet_53: 6430121895970869392
+      Star1V2-Sheet_54: 7623365174638024242
+      Star1V2-Sheet_55: -9002363474296118777
+      Star1V2-Sheet_56: -5169704631251191470
+      Star1V2-Sheet_57: -8741224815411712648
+      Star1V2-Sheet_58: 2339849714304096364
+      Star1V2-Sheet_59: -7043454174483121858
+      Star1V2-Sheet_6: -8849011321518420538
+      Star1V2-Sheet_60: 2130614216159853402
+      Star1V2-Sheet_61: -6148582410527249105
+      Star1V2-Sheet_62: -39773846997445413
+      Star1V2-Sheet_63: 7097465337239107641
+      Star1V2-Sheet_64: 7087257737915007385
+      Star1V2-Sheet_65: -6020633688994146082
+      Star1V2-Sheet_66: -4029718026941062685
+      Star1V2-Sheet_67: 2913291596322832040
+      Star1V2-Sheet_68: -260268329954710411
+      Star1V2-Sheet_69: -283695888631169802
+      Star1V2-Sheet_7: 267779126517384975
+      Star1V2-Sheet_8: -6921140470220590664
+      Star1V2-Sheet_9: 8702565076508190088
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

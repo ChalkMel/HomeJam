@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image), typeof(Animator))]
 public class Star : MonoBehaviour
 {
     public int id;
@@ -10,13 +11,19 @@ public class Star : MonoBehaviour
     private Color currentColor;
     private Color originalColor;
 
-    private void Start()
+    private Image starImage;
+
+    private void Awake()
     {
         image = GetComponent<Image>();
         currentColor = image.color;
         originalColor = currentColor;
+        starImage = GetComponent<Image>();
     }
-
+    public void SetSprite(Sprite sprite)
+    {
+        starImage.sprite = sprite;
+    }
     public void SetColor(Color color)
     {
         if (image != null)

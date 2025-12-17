@@ -2,77 +2,54 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    [SerializeField] private Transform[] _points;
-    [SerializeField] private float _speed = 3f;
-    [SerializeField] private float _arrivalThreshold = 0.01f;
-    [SerializeField] private bool _cyclic = true;
+    [SerializeField] private Transform[] points;
+    [SerializeField] private float speed = 3;
+    [SerializeField] private bool speedy = true;
+    private int _currPoint = 0;
+    private float pSpeed;
+    private PlayerController player;
 
-    private int _currentPoint = 0;
-    private Transform _currentTarget;
-
-    private void Start()
+    void Update()
     {
-        _currentTarget = _points[_currentPoint];
-    }
 
-    private void Update()
-    {
-        MovePlatform();
-        CheckArrival();
-    }
+        Transform target = points[_currPoint];
 
-    private void MovePlatform()
-    {
-        transform.position = Vector3.MoveTowards(
+        Vector3 newPosition = Vector3.MoveTowards(
             transform.position,
-            _currentTarget.position,
-            _speed * Time.deltaTime
+            target.position,
+            speed * Time.deltaTime
         );
-    }
 
-    private void CheckArrival()
-    {
-        float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.position);
+        transform.position = newPosition;
 
-        if (distanceToTarget < _arrivalThreshold)
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+        if (distanceToTarget < 0.01f)
         {
-            UpdateTarget();
+            _currPoint++;
+
+            if (_currPoint >= points.Length)
+                _currPoint = 0;
         }
     }
-
-    private void UpdateTarget()
-    {
-        _currentPoint++;
-
-        if (_currentPoint >= _points.Length)
-        {
-            if (_cyclic)
-            {
-                _currentPoint = 0;
-            }
-            else
-            {
-                enabled = false;
-                return;
-            }
-        }
-
-        _currentTarget = _points[_currentPoint];
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.SetParent(transform);
+            collision.gameObject.transform.parent = transform;
+            player = collision.gameObject.GetComponent<PlayerController>();
+            pSpeed = player.speed;
+            //if(speedy)
+            //    player.speed *= 4;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.SetParent(null);
+            collision.transform.parent = null;
+            player.speed = pSpeed;
         }
     }
 }

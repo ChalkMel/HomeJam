@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,16 @@ public class MainGame : MonoBehaviour
     [SerializeField] private Transform starsContainer;
     [SerializeField] private Transform noiseStarsContainer;
     [SerializeField] private Transform linesContainer;
+
+    [Header("Спрайты звезд")]
+    [SerializeField] private Sprite[] starSprites; // Массив спрайтов для всех звезд
+
+    [Header("Настройки анимации")]
+    [SerializeField] private float pulseMinScale = 0.95f;
+    [SerializeField] private float pulseMaxScale = 1.05f;
+    [SerializeField] private float pulseDuration = 1f;
+    [SerializeField] private float minPulseDelay = 2f;
+    [SerializeField] private float maxPulseDelay = 5f;
 
     [Header("Помехи")]
     [SerializeField] private int minNoiseStars = 3;
@@ -51,6 +62,8 @@ public class MainGame : MonoBehaviour
     private bool isDragging = false;
     private Line dragLine;
     private List<int[]> correctConnections = new List<int[]>();
+
+    private List<Coroutine> pulseCoroutines = new List<Coroutine>();
 
     private void Start()
     {
@@ -231,7 +244,7 @@ public class MainGame : MonoBehaviour
         StartCoroutine(FlashStars(star1, star2, isNoise));
     }
 
-    System.Collections.IEnumerator FlashStars(Star star1, Star star2, bool isNoise)
+    IEnumerator FlashStars(Star star1, Star star2, bool isNoise)
     {
         Color flashColor = isNoise ? new Color(1f, 1f, 1f) : wrongColor;
         star1.SetColor(flashColor);
@@ -249,6 +262,7 @@ public class MainGame : MonoBehaviour
     private void LoadLevel()
     {
         ClearAll();
+        StopAllStarPulses();
         Constellation constellation = constellations[currentIndex];
 
         for (int i = 0; i < constellation.connections.Length; i += 2)
@@ -269,7 +283,18 @@ public class MainGame : MonoBehaviour
             star.id = i;
             star.isNoiseStar = false;
             star.SetOriginalColor(normalColor);
+
+            // Устанавливаем случайный спрайт
+            if (starSprites.Length > 0)
+            {
+                Sprite randomSprite = starSprites[Random.Range(0, starSprites.Length)];
+                star.SetSprite(randomSprite);
+            }
+
             stars.Add(star);
+
+            // Запускаем анимацию пульсации для основной звезды
+            StartStarPulse(star);
         }
 
         CreateNoiseStars();
@@ -291,6 +316,14 @@ public class MainGame : MonoBehaviour
             noiseStar.isNoiseStar = true;
             noiseStar.SetOriginalColor(noiseStarColor);
             noiseStar.SetColor(noiseStarColor);
+
+            // Устанавливаем случайный спрайт
+            if (starSprites.Length > 0)
+            {
+                Sprite randomSprite = starSprites[Random.Range(0, starSprites.Length)];
+                noiseStar.SetSprite(randomSprite);
+            }
+
             noiseStars.Add(noiseStar);
         }
     }
@@ -364,7 +397,7 @@ public class MainGame : MonoBehaviour
         Invoke("ResetStars", 3f);
     }
 
-    private System.Collections.IEnumerator BlinkCorrectStars()
+    private IEnumerator BlinkCorrectStars()
     {
         List<Star> toBlink = new List<Star>();
 
@@ -385,6 +418,50 @@ public class MainGame : MonoBehaviour
                 star.SetColor(i % 2 == 0 ? hintColor : normalColor);
 
             yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    private void StartStarPulse(Star star)
+    {
+        Coroutine pulseCoroutine = StartCoroutine(StarPulseCoroutine(star));
+        pulseCoroutines.Add(pulseCoroutine);
+    }
+
+    private void StopAllStarPulses()
+    {
+        foreach (Coroutine coroutine in pulseCoroutines)
+        {
+            if (coroutine != null)
+                StopCoroutine(coroutine);
+        }
+        pulseCoroutines.Clear();
+    }
+
+    private IEnumerator StarPulseCoroutine(Star star)
+    {
+        Image starImage = star.GetComponent<Image>();
+        RectTransform rectTransform = star.GetComponent<RectTransform>();
+        Vector3 originalScale = rectTransform.localScale;
+
+        while (true)
+        {
+            // Ждем случайное время перед началом пульсации
+            float delay = Random.Range(minPulseDelay, maxPulseDelay);
+            yield return new WaitForSeconds(delay);
+
+            // Пульсация
+            float elapsed = 0f;
+            while (elapsed < pulseDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.PingPong(elapsed / pulseDuration * 2, 1f);
+                float scale = Mathf.Lerp(pulseMinScale, pulseMaxScale, t);
+                rectTransform.localScale = originalScale * scale;
+                yield return null;
+            }
+
+            // Возвращаем к исходному размеру
+            rectTransform.localScale = originalScale;
         }
     }
 
