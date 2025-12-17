@@ -28,60 +28,53 @@ public class Ghosting : MonoBehaviour
     private IEnumerator GoGhost()
     {
         nowGhost = true;
-
-        if (playerSprite != null)
-        {
-            Color c = playerSprite.color;
-            c.a = 0.5f;
-            playerSprite.color = c;
-        }
-
-        if (myWall != null)
-        {
-            Color wallColor = myWall.color;
-            wallColor.a = 0.3f;
-            myWall.color = wallColor;
-        }
-
-        if (wallCollider != null)
-        {
-            wallCollider.enabled = false;
-        }
-
         Vector3 oldPos = transform.position;
 
+        SetGhostMode(true);
 
         yield return new WaitForSeconds(time);
 
-        if (wallCollider != null && wallCollider.enabled == false)
+        SetGhostMode(false);
+
+        Collider2D playerCollider = GetComponent<Collider2D>();
+        if (playerCollider != null)
         {
-            Collider2D playerCollider = GetComponent<Collider2D>();
-            if (playerCollider != null)
+            if (wallCollider != null)
             {
-                playerCollider.enabled = false;
-                transform.position = oldPos;
-                playerCollider.enabled = true;
+                wallCollider.enabled = true;
+                if (playerCollider.IsTouching(wallCollider))
+                {
+                    transform.position = oldPos;
+                }
+
             }
         }
 
-        if (wallCollider != null)
+        nowGhost = false;
+    }
+
+    private void SetGhostMode(bool isGhost)
+    {
+        float playerAlpha = isGhost ? 0.5f : 1f;
+        float wallAlpha = isGhost ? 0.3f : 1f;
+
+        if (playerSprite != null)
         {
-            wallCollider.enabled = true;
+            Color c = playerSprite.color;
+            c.a = playerAlpha;
+            playerSprite.color = c;
         }
 
         if (myWall != null)
         {
             Color wallColor = myWall.color;
-            wallColor.a = 1f;
+            wallColor.a = wallAlpha;
             myWall.color = wallColor;
         }
 
-        if (playerSprite != null)
+        if (wallCollider != null)
         {
-            Color c = playerSprite.color;
-            c.a = 1f;
-            playerSprite.color = c;
+            wallCollider.enabled = !isGhost;
         }
-        nowGhost = false;
     }
 }

@@ -14,7 +14,7 @@ public class CheckPoint : MonoBehaviour
         {
             CheckPointSys checkpointSystem = other.GetComponent<CheckPointSys>();
             checkpointSystem.SetCheckpoint(gameObject.transform.position);
-            //animator.SetBool("Checked", true);
+            Debug.Log("Ck");
         }
     }
 }

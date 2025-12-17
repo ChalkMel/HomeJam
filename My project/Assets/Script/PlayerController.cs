@@ -14,9 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundCheckMask;
-    [Header("UI")]
-    [SerializeField] private int startup;
-    [SerializeField] private TextMeshProUGUI hpText;
+
+    [SerializeField] private float animationDelay = 0.5f;
 
     private SpriteRenderer _sr;
     private Rigidbody2D _rb;
@@ -71,7 +70,13 @@ public class PlayerController : MonoBehaviour
 
     public void GetDamage()
     {
-        _animator.SetBool("IsHit", true);
+        _animator.Play("Death");
+        float animationLength = _animator.GetCurrentAnimatorStateInfo(0).length - animationDelay;
+        Invoke(nameof(Respawn), animationLength);
+    }
+
+    private void Respawn()
+    {
         CheckPointSys checkpointSystem = GetComponent<CheckPointSys>();
         checkpointSystem.Respawn();
     }

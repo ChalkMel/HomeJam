@@ -7,18 +7,16 @@ public class NextLevel : MonoBehaviour
 
     [SerializeField] private int reduceJumpForce;
 
-    [SerializeField] private string failMessage;
-    [SerializeField] private GameObject dialogueScreen;
-    [SerializeField] private TextMeshProUGUI dialogueText;
-
     [SerializeField] private Transform teleportPoint;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject think;
+    [SerializeField] private GameObject thinkAbout;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (key.isPicked)
+            if (key._isPicked)
             {
                 player.transform.position = teleportPoint.position;
                 PlayerController playerC = collision.gameObject.GetComponent<PlayerController>();
@@ -30,16 +28,19 @@ public class NextLevel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if(key.isPicked == false)
+            if(key._isPicked == false)
             {
-                dialogueScreen.SetActive(true);
-                dialogueText.text = failMessage;
+                think.SetActive(true);
+                thinkAbout.SetActive(true);
             }      
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-            dialogueScreen.SetActive(false);
+        {
+            think.SetActive(false);
+            thinkAbout.SetActive(false);
+        }
     }
 }

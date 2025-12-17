@@ -49,6 +49,9 @@ TagManager:
   - name: Things
     uniqueID: 3836529839
     locked: 0
+  - name: UI
+    uniqueID: 1734801665
+    locked: 0
   - name: Player
     uniqueID: 3843532731
     locked: 0
