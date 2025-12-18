@@ -24,10 +24,8 @@ public class AudioSettings : MonoBehaviour
 
     void Start()
     {
-        // Загружаем сохранённые настройки
         LoadSettings();
 
-        // Настраиваем слайдеры
         if (musicSlider != null)
             musicSlider.onValueChanged.AddListener(SetMusicVolume);
 
@@ -37,10 +35,9 @@ public class AudioSettings : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
-        // Конвертируем значение слайдера (0-1) в децибелы (-80 до 0)
         float dbVolume = Mathf.Log10(volume) * 20;
 
-        if (volume <= 0.001f) // Если почти 0, делаем тише
+        if (volume <= 0.001f) 
             dbVolume = -80f;
 
         audioMixer.SetFloat("MusicVolume", dbVolume);
@@ -60,15 +57,12 @@ public class AudioSettings : MonoBehaviour
 
     void LoadSettings()
     {
-        // Загружаем сохранённые значения или используем значения по умолчанию
-        float savedMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        float savedMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.8f);
         float savedSFXVolume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
 
-        // Применяем настройки
         SetMusicVolume(savedMusicVolume);
         SetSFXVolume(savedSFXVolume);
 
-        // Устанавливаем значения слайдеров
         if (musicSlider != null)
             musicSlider.value = savedMusicVolume;
 

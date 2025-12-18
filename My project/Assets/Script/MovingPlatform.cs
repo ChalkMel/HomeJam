@@ -40,7 +40,7 @@ public class MovingPlatform : MonoBehaviour
             player = collision.gameObject.GetComponent<PlayerController>();
             pSpeed = player.speed;
             //if(speedy)
-            //    player.speed *= 4;
+            //    player.speed = 2;
         }
     }
 

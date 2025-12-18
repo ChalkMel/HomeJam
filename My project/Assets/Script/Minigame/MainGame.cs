@@ -284,7 +284,6 @@ public class MainGame : MonoBehaviour
             star.isNoiseStar = false;
             star.SetOriginalColor(normalColor);
 
-            // Устанавливаем случайный спрайт
             if (starSprites.Length > 0)
             {
                 Sprite randomSprite = starSprites[Random.Range(0, starSprites.Length)];
@@ -293,7 +292,6 @@ public class MainGame : MonoBehaviour
 
             stars.Add(star);
 
-            // Запускаем анимацию пульсации для основной звезды
             StartStarPulse(star);
         }
 
@@ -317,7 +315,6 @@ public class MainGame : MonoBehaviour
             noiseStar.SetOriginalColor(noiseStarColor);
             noiseStar.SetColor(noiseStarColor);
 
-            // Устанавливаем случайный спрайт
             if (starSprites.Length > 0)
             {
                 Sprite randomSprite = starSprites[Random.Range(0, starSprites.Length)];
@@ -445,11 +442,9 @@ public class MainGame : MonoBehaviour
 
         while (true)
         {
-            // Ждем случайное время перед началом пульсации
             float delay = Random.Range(minPulseDelay, maxPulseDelay);
             yield return new WaitForSeconds(delay);
 
-            // Пульсация
             float elapsed = 0f;
             while (elapsed < pulseDuration)
             {
@@ -460,7 +455,6 @@ public class MainGame : MonoBehaviour
                 yield return null;
             }
 
-            // Возвращаем к исходному размеру
             rectTransform.localScale = originalScale;
         }
     }

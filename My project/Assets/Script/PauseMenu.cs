@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
     {
         returnButton.onClick.AddListener(Play);
         mainMenuButton.onClick.AddListener(MainMenu);
+        Time.timeScale = 0;
     }
 
 
@@ -46,6 +47,11 @@ public class PauseMenu : MonoBehaviour
     {
         _isPaused = false;
         menu.SetActive(false);
+        Time.timeScale = 1.0f;
+    }
+
+    public void StartTime()
+    {
         Time.timeScale = 1.0f;
     }
 }
