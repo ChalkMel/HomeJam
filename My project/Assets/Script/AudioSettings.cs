@@ -57,8 +57,8 @@ public class AudioSettings : MonoBehaviour
 
     void LoadSettings()
     {
-        float savedMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.8f);
-        float savedSFXVolume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        float savedMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float savedSFXVolume = PlayerPrefs.GetFloat("SFXVolume",1f);
 
         SetMusicVolume(savedMusicVolume);
         SetSFXVolume(savedSFXVolume);

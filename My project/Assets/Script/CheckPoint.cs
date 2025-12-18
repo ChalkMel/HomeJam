@@ -14,7 +14,6 @@ public class CheckPoint : MonoBehaviour
         {
             CheckPointSys checkpointSystem = other.GetComponent<CheckPointSys>();
             checkpointSystem.SetCheckpoint(gameObject.transform.position);
-            Debug.Log("Ck");
         }
     }
 }

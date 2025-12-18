@@ -4,9 +4,7 @@ public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private Transform[] points;
     [SerializeField] private float speed = 3;
-    [SerializeField] private bool speedy = true;
     private int _currPoint = 0;
-    private float pSpeed;
     private PlayerController player;
 
     void Update()
@@ -38,9 +36,6 @@ public class MovingPlatform : MonoBehaviour
         {
             collision.gameObject.transform.parent = transform;
             player = collision.gameObject.GetComponent<PlayerController>();
-            pSpeed = player.speed;
-            //if(speedy)
-            //    player.speed = 2;
         }
     }
 
@@ -49,7 +44,6 @@ public class MovingPlatform : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.transform.parent = null;
-            player.speed = pSpeed;
         }
     }
 }

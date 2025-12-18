@@ -368,7 +368,6 @@ public class MainGame : MonoBehaviour
             if (!IsPairMade(pair[0], pair[1]))
                 return;
 
-        Debug.Log("Созвездие собрано");
         SceneManager.LoadScene(nextScene);
     }
 

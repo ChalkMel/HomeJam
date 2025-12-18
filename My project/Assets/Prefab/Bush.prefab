@@ -56,6 +56,7 @@ MonoBehaviour:
   lig: {fileID: 8629682507177150105}
   eaten: {fileID: -6627649529965710048, guid: e70736a71fe9b2e40a68d2d4373bb7be, type: 3}
   fBtn: {fileID: 0}
+  _isInteractable: 1
 --- !u!212 &4392300259560948670
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -200,13 +201,13 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: ebbbe1b5b7eac654f8c43fb28551434c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.598
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 181
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

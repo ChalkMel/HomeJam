@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         if (!onLadder)
         {
             _isClimbing = false;
+            _isGrounded = false;
         }
     }
 
